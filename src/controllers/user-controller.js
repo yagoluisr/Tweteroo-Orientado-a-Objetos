@@ -1,8 +1,23 @@
 const usuarios = [];
 const tweets = [];
 
+class User {
+    constructor(username, avatar) {
+        
+        this.username = username;
+        this.avatar = avatar;
+    }
+
+    insertUser() {
+        const body = {
+            username: this.username,
+            avatar: this.avatar
+        }
+        usuarios.push(body);
+    }
+}
+
 export async function userPost(req, res) {
-console.log('entrou')
 
     const { username, avatar } = req.body;
 
@@ -11,7 +26,8 @@ console.log('entrou')
         return;
     }
 
-    usuarios.push({ username, avatar });
+    const newUser = new User(username, avatar);
+    newUser.insertUser();
 
     res.status(200).send('OK deu tudo certo');
 }
