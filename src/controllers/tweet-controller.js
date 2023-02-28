@@ -4,6 +4,7 @@ class Tweet {
   constructor() {
     this.tweets = [];
     this.postTweet = this.postTweet.bind(this);
+    this.getAllTweets = this.getAllTweets.bind(this);
   }
 
   postTweet(req, res) {
@@ -18,6 +19,14 @@ class Tweet {
     this.tweets.push({ username, tweet, avatar });
   
     res.status(201).send('OK, seu tweet foi criado');
+  }
+
+  getAllTweets(req, res) {
+    const { username } = req.params;
+  
+    const tweetsDoUsuario = this.tweets.filter(t => t.username === username);
+  
+    res.status(200).send(tweetsDoUsuario);
   }
 
 }

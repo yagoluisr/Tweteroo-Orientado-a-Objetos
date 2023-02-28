@@ -9,16 +9,12 @@ dotenv.config();
 
 const app = express();
 
-const usuarios = [];
-const tweets = [];
-
-
 app
   .use(cors())
   .use(json())
   .get('/health', (_req, res) => res.send("OK!"))
   .use('/sign-up', userRouter)
-  .use('/tweets', tweetRouter)
+  .use('/tweets', tweetRouter);
 
 app.listen(process.env.PORT, () => {
     console.log("Magic happens on port " + process.env.PORT);

@@ -4,7 +4,9 @@ import tweetController from "../controllers/tweet-controller.js";
 
 const tweetRouter = Router();
 
-tweetRouter.post('', tweetController.postTweet);
+tweetRouter
+    .post('', tweetController.postTweet)
+    .get('/:username', tweetController.getAllTweets)
 
 
 export { tweetRouter };
