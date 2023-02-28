@@ -1,33 +1,21 @@
-const usuarios = [];
-const tweets = [];
-
 class User {
-    constructor(username, avatar) {
-        
-        this.username = username;
-        this.avatar = avatar;
+    constructor() {
+        this.usuarios = [];
+        this.userPost = this.userPost.bind(this);
     }
 
-    insertUser() {
-        const body = {
-            username: this.username,
-            avatar: this.avatar
+    userPost(req, res) {
+        const { username, avatar } = req.body;
+    
+        if (!username || !avatar) {
+            res.status(400).send('Todos os campos são obrigatórios!');
+            return;
         }
-        usuarios.push(body);
+    
+        this.usuarios.push({ username, avatar });
+
+        res.status(200).send('OK deu tudo certo');
     }
 }
 
-export async function userPost(req, res) {
-
-    const { username, avatar } = req.body;
-
-    if (!username || !avatar) {
-        res.status(400).send('Todos os campos são obrigatórios!');
-        return;
-    }
-
-    const newUser = new User(username, avatar);
-    newUser.insertUser();
-
-    res.status(200).send('OK deu tudo certo');
-}
+export default new User();
