@@ -16,6 +16,10 @@ class User {
 
         res.status(200).send('OK deu tudo certo');
     }
+
+    getUser(username) {
+        return this.usuarios.find(user => user.username === username);
+    }
 }
 
 export default new User();

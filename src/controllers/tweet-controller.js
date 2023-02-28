@@ -1,24 +1,25 @@
-
-const tweets = [];
-
+import User from "./user-controller.js";
 
 class Tweet {
-    constructor(tweet, username) {
-        this.tweet = tweet;
-        this.username = username;
-    }
-}
+  constructor() {
+    this.tweets = [];
+    this.postTweet = this.postTweet.bind(this);
+  }
 
-export function postTweet(req, res) {
+  postTweet(req, res) {
     const { tweet, username } = req.body;
   
     if (!username || !tweet) {
       return res.status(400).send('Todos os campos são obrigatórios!');
     }
   
-    const { avatar } = usuarios.find(user => user.username === username);
-  
-    tweets.push({ username, tweet, avatar });
+    const { avatar } = User.getUser(username);
+
+    this.tweets.push({ username, tweet, avatar });
   
     res.status(201).send('OK, seu tweet foi criado');
   }
+
+}
+
+export default new Tweet();
