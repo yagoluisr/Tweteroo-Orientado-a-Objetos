@@ -6,7 +6,8 @@ const tweetRouter = Router();
 
 tweetRouter
     .post('', tweetController.postTweet)
-    .get('/:username', tweetController.getAllTweets)
+    .get('/:username', tweetController.getByUser)
+    .get('', tweetController.getAll)
 
 
 export { tweetRouter };
